@@ -3,7 +3,6 @@ let canvas = document.querySelector("#canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - 100;
 
-
 window.addEventListener("resize", function () {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight - 100;
@@ -66,6 +65,62 @@ canvas.addEventListener("mouseup", function () {
 	console.log(linesDB);
 });
 
+
+
+
+//  for mobile
+
+// Touch support
+canvas.addEventListener("touchstart", function (e) {
+	isPenDown = true;
+	let touch = e.touches[0];
+	let x = touch.clientX;
+	let y = touch.clientY - 100;
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+
+	let pointObject = {
+		x: x,
+		y: y,
+		type: "md",
+		lineWidth: ctx.lineWidth,
+		strokeStyle: ctx.strokeStyle,
+	};
+	line.push(pointObject);
+});
+
+canvas.addEventListener("touchmove", function (e) {
+	if (isPenDown) {
+		let touch = e.touches[0];
+		let x = touch.clientX;
+		let y = touch.clientY - 100;
+		ctx.lineTo(x, y);
+		ctx.stroke();
+
+		let pointObject = {
+			x: x,
+			y: y,
+			type: "mm",
+		};
+		line.push(pointObject);
+	}
+	e.preventDefault(); // prevent scrolling while drawing
+}, { passive: false });
+
+canvas.addEventListener("touchend", function () {
+	isPenDown = false;
+	linesDB.push(line);
+	line = [];
+});
+
+
+
+
+
+
+
+
+
 // Drawing
 
 
@@ -81,7 +136,6 @@ let eraserSize = eraserOptions.querySelector("#erasersize");
 // let penColors = penOptions.querySelectorAll(".pen-colors div");
 let penColors = penOptions.querySelectorAll(".pen-colors div:not(#color-picker)");
 let colorPicker = document.querySelector("#color-picker");
-
 
 let currentPenSize = 1;
 let currentPenColor = "black";
@@ -110,11 +164,12 @@ for (let i = 0; i < penColors.length; i++) {
 	});
 }
 
-// Handle custom color picked from color palette
-colorPicker.addEventListener("input", function (e) {
-	currentPenColor = e.target.value; // hex color like #ff0000
+colorPicker.addEventListener("input", function () {
+	let pickedColor = colorPicker.value;
+	currentPenColor = pickedColor;
 	ctx.strokeStyle = currentPenColor;
 });
+
 
 pen.addEventListener("click", function () {
 	if (pen.classList.contains("active-tool")) {

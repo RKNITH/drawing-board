@@ -45,27 +45,6 @@ body {
     background-color: aqua;
   } */
 
-
-
-
-/* Enable vertical scroll */
-/* .drawing-scroll-container {
-  height: calc(100vh - 100px);
-  
-  overflow-y: scroll;
-  position: relative;
-} */
-
-/* Initial canvas size */
-/* canvas {
-  display: block;
-  width: 100%;
-  min-height: 2000px;
-  
-} 
-*/
-
-
 .sticky {
   position: absolute;
   top: 200px;
@@ -149,8 +128,6 @@ body {
   width: 100%;
 }
 
-
-
 .eraser-size input {
   width: 100%;
 }
@@ -166,16 +143,6 @@ body {
   width: 14px;
   border-radius: 50px;
 }
-
-.pen-colors input[type="color"] {
-  width: 30px;
-  height: 30px;
-  border: none;
-  padding: 0;
-  margin-left: 5px;
-  cursor: pointer;
-}
-
 
 .black {
   background: black;
