@@ -166,8 +166,14 @@ body {
 
 #color-picker {
   position: relative;
-  z-index: 10;
+  z-index: 1000;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background: none;
 }
+
 
 canvas {
   touch-action: none;
